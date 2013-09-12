@@ -4,7 +4,7 @@ except ImportError:
     # for Django version less than 1.4
     from django.conf.urls.defaults import url, patterns, include
 
-from redactor.views import redactor_upload
+from redactor.views import redactor_upload, browse_images
 from redactor.forms import FileForm, ImageForm
 
 
@@ -19,4 +19,5 @@ urlpatterns = patterns(
         'form_class': FileForm,
         'response': lambda name, url: '<a href="%s">%s</a>' % (url, name),
         }, name='redactor_upload_file'),
+    url(r'^browse/$', browse_images, name='redactor_browse_images')
 )

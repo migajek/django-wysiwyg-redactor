@@ -35,6 +35,7 @@ class RedactorEditor(widgets.Textarea):
         self.custom_options = kwargs.pop('redactor_options', {})
         self.allow_file_upload = kwargs.pop('allow_file_upload', True)
         self.allow_image_upload = kwargs.pop('allow_image_upload', True)
+        self.allow_image_browse = kwargs.pop('allow_image_browse', True)
         super(RedactorEditor, self).__init__(*args, **kwargs)
 
     def get_options(self):
@@ -46,6 +47,8 @@ class RedactorEditor(widgets.Textarea):
         if self.allow_image_upload:
             options['imageUpload'] = reverse('redactor_upload_image', 
                 kwargs={'upload_to': self.upload_to})
+        if self.allow_image_browse:
+            options['imageGetJson']= reverse('redactor_browse_images')
         return json.dumps(options)
 
     def render(self, name, value, attrs=None):
